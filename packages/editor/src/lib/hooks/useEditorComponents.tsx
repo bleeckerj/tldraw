@@ -24,6 +24,8 @@ import {
 	DefaultSelectionForeground,
 	TLSelectionForegroundProps,
 } from '../components/default-components/DefaultSelectionForeground'
+import { DefaultSelectionCornerHandle } from '../components/default-components/DefaultSelectionCornerHandle'
+import { DefaultSelectionOutline } from '../components/default-components/DefaultSelectionOutline'
 import {
 	DefaultShapeErrorFallback,
 	TLShapeErrorFallbackComponent,
@@ -50,6 +52,22 @@ import { DefaultSvgDefs } from '../components/default-components/DefaultSvgDefs'
 import { useShallowObjectIdentity } from './useIdentity'
 
 /** @public */
+export interface TLSelectionCornerHandleProps {
+	x: number
+	y: number
+	width: number
+	height: number
+	className?: string
+}
+
+/** @public */
+export interface TLSelectionOutlineProps {
+	width: number
+	height: number
+	className?: string
+}
+
+/** @public */
 export interface TLEditorComponents {
 	Background?: ComponentType | null
 	Brush?: ComponentType<TLBrushProps> | null
@@ -70,6 +88,8 @@ export interface TLEditorComponents {
 	Scribble?: ComponentType<TLScribbleProps> | null
 	SelectionBackground?: ComponentType<TLSelectionBackgroundProps> | null
 	SelectionForeground?: ComponentType<TLSelectionForegroundProps> | null
+	SelectionCornerHandle?: ComponentType<TLSelectionCornerHandleProps> | null
+	SelectionOutline?: ComponentType<TLSelectionOutlineProps> | null
 	ShapeIndicator?: ComponentType<TLShapeIndicatorProps> | null
 	ShapeIndicators?: ComponentType | null
 	ShapeWrapper?: ComponentType<TLShapeWrapperProps & RefAttributes<HTMLDivElement>> | null
@@ -117,6 +137,8 @@ export function EditorComponentsProvider({
 			Scribble: DefaultScribble,
 			SelectionBackground: null,
 			SelectionForeground: DefaultSelectionForeground,
+			SelectionCornerHandle: DefaultSelectionCornerHandle,
+			SelectionOutline: DefaultSelectionOutline,
 			ShapeIndicator: DefaultShapeIndicator,
 			ShapeIndicators: DefaultShapeIndicators,
 			ShapeWrapper: DefaultShapeWrapper,

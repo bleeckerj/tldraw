@@ -99,35 +99,35 @@ const WatermarkInner = memo(function WatermarkInner({
 	const maskCss = `url('${src}') center 100% / 100% no-repeat`
 	const url = 'https://tldraw.dev/?utm_source=sdk&utm_medium=organic&utm_campaign=watermark'
 
-	if (isUnlicensed) {
+	if (false /*isUnlicensed*/) {
 		return <UnlicensedWatermark isDebugMode={isDebugMode} isMobile={isMobile} />
 	}
 
-	return (
-		<div
-			ref={ref}
-			className={LicenseManager.className}
-			data-debug={isDebugMode}
-			data-mobile={isMobile}
-			data-testid="tl-watermark-licensed"
-			draggable={false}
-			{...events}
-		>
-			<button
-				draggable={false}
-				role="button"
-				onPointerDown={(e) => {
-					editor.markEventAsHandled(e)
-					preventDefault(e)
-				}}
-				title="Build infinite canvas applications with the tldraw SDK. Learn more at https://tldraw.dev."
-				onClick={() => {
-					runtime.openWindow(url, '_blank')
-				}}
-				style={{ mask: maskCss, WebkitMask: maskCss }}
-			/>
-		</div>
-	)
+	// return (
+	// 	<div
+	// 		ref={ref}
+	// 		className={LicenseManager.className}
+	// 		data-debug={isDebugMode}
+	// 		data-mobile={isMobile}
+	// 		data-testid="tl-watermark-licensed"
+	// 		draggable={false}
+	// 		{...events}
+	// 	>
+	// 		<button
+	// 			draggable={false}
+	// 			role="button"
+	// 			onPointerDown={(e) => {
+	// 				editor.markEventAsHandled(e)
+	// 				preventDefault(e)
+	// 			}}
+	// 			title="Build infinite canvas applications with the tldraw SDK. Learn more at https://tldraw.dev."
+	// 			onClick={() => {
+	// 				runtime.openWindow(url, '_blank')
+	// 			}}
+	// 			style={{ mask: maskCss, WebkitMask: maskCss }}
+	// 		/>
+	// 	</div>
+	// )
 })
 
 const LicenseStyles = memo(function LicenseStyles() {

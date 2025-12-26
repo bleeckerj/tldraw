@@ -8,6 +8,7 @@ import {
 	toDomPrecision,
 	track,
 	useEditor,
+	useEditorComponents,
 	useSelectionEvents,
 	useTransform,
 	useValue,
@@ -24,6 +25,7 @@ export const TldrawSelectionForeground = track(function TldrawSelectionForegroun
 	rotation,
 }: TLSelectionForegroundProps) {
 	const editor = useEditor()
+	const { SelectionCornerHandle, SelectionOutline } = useEditorComponents()
 	const msg = useTranslation()
 	const rSvg = useRef<SVGSVGElement>(null)
 
@@ -203,11 +205,11 @@ export const TldrawSelectionForeground = track(function TldrawSelectionForegroun
 			aria-hidden="true"
 		>
 			<g ref={rSvg}>
-				{shouldDisplayBox && (
-					<rect
+				{shouldDisplayBox && SelectionOutline && (
+					<SelectionOutline
 						className="tl-selection__fg__outline"
-						width={toDomPrecision(width)}
-						height={toDomPrecision(height)}
+						width={width}
+						height={height}
 					/>
 				)}
 				<RotateCornerHandle
@@ -350,47 +352,43 @@ export const TldrawSelectionForeground = track(function TldrawSelectionForegroun
 					events={bottomLeftEvents}
 				/>
 				{/* Resize Handles */}
-				{showResizeHandles && (
+				{showResizeHandles && SelectionCornerHandle && (
 					<>
-						<rect
-							data-testid="selection.resize.top-left"
+						<SelectionCornerHandle
 							className={classNames('tl-corner-handle', {
 								'tl-hidden': hideTopLeftCorner,
 							})}
-							x={toDomPrecision(0 - size / 2)}
-							y={toDomPrecision(0 - size / 2)}
-							width={toDomPrecision(size)}
-							height={toDomPrecision(size)}
+							x={0 - size / 2}
+							y={0 - size / 2}
+							width={size}
+							height={size}
 						/>
-						<rect
-							data-testid="selection.resize.top-right"
+						<SelectionCornerHandle
 							className={classNames('tl-corner-handle', {
 								'tl-hidden': hideTopRightCorner,
 							})}
-							x={toDomPrecision(width - size / 2)}
-							y={toDomPrecision(0 - size / 2)}
-							width={toDomPrecision(size)}
-							height={toDomPrecision(size)}
+							x={width - size / 2}
+							y={0 - size / 2}
+							width={size}
+							height={size}
 						/>
-						<rect
-							data-testid="selection.resize.bottom-right"
+						<SelectionCornerHandle
 							className={classNames('tl-corner-handle', {
 								'tl-hidden': hideBottomRightCorner,
 							})}
-							x={toDomPrecision(width - size / 2)}
-							y={toDomPrecision(height - size / 2)}
-							width={toDomPrecision(size)}
-							height={toDomPrecision(size)}
+							x={width - size / 2}
+							y={height - size / 2}
+							width={size}
+							height={size}
 						/>
-						<rect
-							data-testid="selection.resize.bottom-left"
+						<SelectionCornerHandle
 							className={classNames('tl-corner-handle', {
 								'tl-hidden': hideBottomLeftCorner,
 							})}
-							x={toDomPrecision(0 - size / 2)}
-							y={toDomPrecision(height - size / 2)}
-							width={toDomPrecision(size)}
-							height={toDomPrecision(size)}
+							x={0 - size / 2}
+							y={height - size / 2}
+							width={size}
+							height={size}
 						/>
 					</>
 				)}
